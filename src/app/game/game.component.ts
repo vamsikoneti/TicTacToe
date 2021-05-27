@@ -34,7 +34,10 @@ export class GameComponent implements OnInit {
         const colour = this.game.getPlayerColourClass();
         subField.currentTarget.classList.add(colour);
 
+        //await this.game.checkGameEndWinner();
+        
 
+        await this.game.checkGameEndFull();
 
         this.game.changePlayer();
 
