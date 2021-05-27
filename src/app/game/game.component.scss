@@ -35,6 +35,17 @@
                 height: 100px;
                 width: 100px;
                 border: 2px solid white;
+
+                &.player-1
+                {
+                    background: lightgreen;
+                }
+
+                &.player-2
+                {
+                    background: lightsalmon;
+                }
+
             }
         }
     }

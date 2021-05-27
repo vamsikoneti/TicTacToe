@@ -37,4 +37,21 @@ export class Gamelogic {
         return start;
     }
 
+    setField(position: number, value: number): void
+    {
+        this.gamefield[position] = value;
+
+    }
+
+    getPlayerColourClass():string
+    {
+        const colourClass = (this.currentTurn ===2)? 'player-2' : 'player-1';
+        return colourClass;
+    }
+
+    changePlayer(): void
+    {
+        this.currentTurn = (this.currentTurn ===2)? 1: 2;
+    }
+
 }
