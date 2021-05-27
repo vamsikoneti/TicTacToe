@@ -35,9 +35,23 @@ export class GameComponent implements OnInit {
         subField.currentTarget.classList.add(colour);
 
         //await this.game.checkGameEndWinner();
-        
+        await this.game.checkGameEndWinner().then( (end: boolean) =>
+        {
+          if(this.game.gameStatus===0 && end)
+          {
+            const information = document.querySelector('.current-status');
+            information!.innerHTML = 'Winner: Player' + this.game.currentTurn;
+          }
+        });
 
-        await this.game.checkGameEndFull();
+        await this.game.checkGameEndFull().then( (end: boolean) =>
+        {
+          if(this.game.gameStatus===0 && end)
+          {
+            const information = document.querySelector('.current-status');
+            information!.innerHTML = 'Draw!';
+          }
+        });
 
         this.game.changePlayer();
 

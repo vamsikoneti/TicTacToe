@@ -16,6 +16,28 @@ export class Gamelogic {
     currentTurn?: number;
     gameStatus?: Status;
 
+    winSituations1: Array<Array<number>> = 
+    [
+        [1,1,1,0,0,0,0,0,0], 
+        [0,0,0,1,1,1,0,0,0],
+        [0,0,0,0,0,0,1,1,1],
+        [1,0,0,1,0,0,1,0,0],
+        [0,1,0,0,1,0,0,1,0],
+        [1,0,0,0,1,0,0,0,1],
+        [0,0,1,0,1,0,1,0,0]
+    ];
+
+    winSituations2: Array<Array<number>> = 
+    [
+        [2,2,2,0,0,0,0,0,0], 
+        [0,0,0,2,2,2,0,0,0],
+        [0,0,0,0,0,0,2,2,2],
+        [2,0,0,2,0,0,2,0,0],
+        [0,2,0,0,2,0,0,2,0],
+        [2,0,0,0,2,0,0,0,2],
+        [0,0,2,0,2,0,2,0,0]
+    ];
+
 
     public constructor()
     {
@@ -54,6 +76,12 @@ export class Gamelogic {
         this.currentTurn = (this.currentTurn ===2)? 1: 2;
     }
 
+    arrayEquals(a: Array<any>, b: Array<any>): boolean
+    {
+        return Array.isArray(a) && Array.isArray(b) && a.length === b.length &&
+        a.every((value, index) => value ===b[index]);
+    }
+
     async checkGameEndFull(): Promise<boolean>
     {
         let isFull = true;
@@ -76,6 +104,45 @@ export class Gamelogic {
     gameEnds(): void
     {
         this.gameStatus = Status.STOP;
+    }
+
+    async checkGameEndWinner(): Promise<boolean>
+    {
+        let isWinner = false;
+
+        const win = (this.currentTurn ===1 )? this.winSituations1 : this.winSituations2;
+        const currarr: any[] = [];
+
+        this.gamefield.forEach( (subfield, index) =>
+        {
+            if(subfield !== this.currentTurn)
+            {
+                currarr[index] = 0;
+            }
+            else
+            {
+                currarr[index] = subfield;
+            }
+        } );
+
+        win.forEach( ( checkfield, checkindex ) => 
+        {
+            if(this.arrayEquals(checkfield, currarr))
+            {
+                isWinner = true;
+            }
+        } );
+
+
+        if(isWinner)
+        {
+            this.gameEnds();
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
 }
