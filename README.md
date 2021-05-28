@@ -1,7 +1,7 @@
 # TicTacToe
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.6.  
-Play the game [here]:  (vamsikoneti.github.io/tictactoe/)
+Play the game here:  [vamsikoneti.github.io/tictactoe/](vamsikoneti.github.io/tictactoe/)
 
 ## Development server
 
